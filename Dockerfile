@@ -4,7 +4,7 @@ RUN set -x && \
 	dpkg --add-architecture i386 && \
 	apt-get update -y && \
 	apt-get upgrade -y && \
-	apt-get install -y lib32z1 lib32ncurses-dev lib32gcc1 lib32stdc++6 wget curl libcurl3-gnutls:i386 ca-certificates --no-install-recommends && \
+	apt-get install -y vim rsync lib32z1 lib32ncurses-dev lib32gcc1 lib32stdc++6 wget curl libcurl3-gnutls:i386 ca-certificates --no-install-recommends && \
 	adduser steam && \
 	mkdir -p /home/steam/steamcmd && \
 	wget -O /tmp/steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz && \
@@ -13,15 +13,14 @@ RUN set -x && \
 	rm -rf /tmp/* /var/lib/apt/lists/* 
 
 COPY tf2serv.txt /home/steam/steamcmd/tf2serv.txt
-COPY startserver.sh /home/steam/steamcmd/startserver.sh
 COPY bin/* /usr/local/bin/
 
 RUN set -x && \
 	/home/steam/steamcmd/steamcmd.sh +runscript /home/steam/steamcmd/tf2serv.txt && \
 	update_metamod && \
 	update_sourcemod && \
+	chown steam:steam /home/steam -R && \
 	rm -rfv /tmp/*
-
 
 ENV TTTF2_MAP="arena_badlands" \
 	TTTF2_RCON_PASSWORD="changeme" \
@@ -32,7 +31,7 @@ ENV TTTF2_MAP="arena_badlands" \
 	TTTF2_HOSTNAME="TTTF2.com Development Server" \
 	TTTF2_FASTDL="https://fastdl.tttf2.com/"
 
-
+USER steam
 EXPOSE 27015 27015/udp
 
-ENTRYPOINT ["/home/steam/steamcmd/startserver.sh"]
+ENTRYPOINT ["/usr/bin/startserver"]

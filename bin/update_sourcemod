@@ -2,5 +2,5 @@
 
 SM_VERSION=`curl -s http://www.sourcemod.net/smdrop/1.10/sourcemod-latest-linux`
 wget -q -O /tmp/sm.tgz "http://www.sourcemod.net/smdrop/1.10/$SM_VERSION"
-tar -zxf /tmp/sm.tgz -C /home/steam/steamcmd/tf2/tf/
+tar -zxf /tmp/sm.tgz -C /home/steam/tf2/tf/
 rm /tmp/sm.tgz

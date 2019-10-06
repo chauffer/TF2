@@ -4,5 +4,5 @@ MM_VERSION=$(curl -s 'http://metamodsource.net/mmsdrop/1.11/' |
    sort -t. -rn -k1,1 -k2,2 -k3,3 | head -1)
 
 wget -qO /tmp/metamod.tar.gz "http://metamodsource.net/mmsdrop/1.11/${MM_VERSION}-linux.tar.gz"
-tar -zxf /tmp/metamod.tar.gz -C /home/steam/steamcmd/tf2/tf/
+tar -zxf /tmp/metamod.tar.gz -C /home/steam/tf2/tf/
 rm /tmp/metamod.tar.gz

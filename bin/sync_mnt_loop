@@ -1,0 +1,5 @@
+#!/bin/sh
+while true; do
+	sync_mnt
+	sleep 1
+done

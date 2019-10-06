@@ -1,0 +1,2 @@
+#!/bin/sh
+rsync /mnt/ /home/steam/tf2/tf/ -a --inplace
