@@ -23,8 +23,14 @@ RUN set -x && \
 	rm -rfv /tmp/*
 
 
-ENV TTTF2_MAP="tttf2_alpha1" \
-	TTTF2_RCON_PASSWORD="changeme"
+ENV TTTF2_MAP="arena_badlands" \
+	TTTF2_RCON_PASSWORD="changeme" \
+	TTTF2_SV_PASSWORD="toctoc" \
+	TTTF2_MAXPLAYERS="32" \
+	TTTF2_BIND_IP="0.0.0.0" \
+	TTTF2_PORT="27015" \
+	TTTF2_HOSTNAME="TTTF2.com Development Server" \
+	TTTF2_FASTDL="https://fastdl.tttf2.com/"
 
 
 EXPOSE 27015 27015/udp
