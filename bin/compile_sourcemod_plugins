@@ -2,15 +2,19 @@
 set -ex
 TMPDIR="/tmp/compile_sourcemod_plugins"
 FROM="/home/steam/sourcemod_plugins/"
-TO="/home/steam/tf2/tf/addons/plugins"
+SMDIR="/home/steam/tf2/tf/addons/sourcemod/"
 
-mkdir -p $TMPDIR
+mkdir -p $TMPDIR/include
 cd $TMPDIR
 
-cp -r $FROM $TMPDIR
-for i in $(ls); do
+cp -r $SMDIR/scripting/include $TMPDIR/include
+cp -r $FROM/* $TMPDIR
+rm -f *.smx
+
+for i in $(ls | grep \.sp$); do
     smxfile="`echo $i | sed -e 's/\.sp$/\.smx/'`"
-    /home/steam/tf2/tf/addons/scripting/spcomp $i -o $smxfile
+    ${SMDIR}/scripting/spcomp64 $i -o $smxfile || true
 done
-cp *.smx $TO
+
+cp *.smx ${SMDIR}/plugins/ || true
 rm -rf $TMPDIR

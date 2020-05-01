@@ -4,7 +4,7 @@ RUN set -x && \
 	dpkg --add-architecture i386 && \
 	apt-get update -y && \
 	apt-get upgrade -y && \
-	apt-get install -y vim rsync lib32z1 lib32ncurses-dev lib32gcc1 lib32stdc++6 wget curl libcurl3-gnutls:i386 ca-certificates --no-install-recommends && \
+	apt-get install -y vim rsync lib32z1 lib32ncurses-dev lib32gcc1 lib32stdc++6 wget curl libcurl3-gnutls:i386 ca-certificates libcurl3-gnutls:i386  --no-install-recommends && \
 	adduser steam && \
 	mkdir -p /home/steam/steamcmd && \
 	wget -O /tmp/steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz && \
@@ -23,7 +23,7 @@ COPY sourcemod_plugins /home/steam/sourcemod_plugins
 RUN set -x && \
 	update_metamod && \
 	update_sourcemod && \
-	compile_sourcemod_plugins && \
+	compile_sourcemod_plugins || true && \
 	chown steam:steam /home/steam -R && \
 	rm -rfv /tmp/*
 
@@ -39,4 +39,4 @@ ENV TTTF2_MAP="cp_cloak" \
 USER steam
 EXPOSE 27015 27015/udp
 
-ENTRYPOINT ["/usr/bin/startserver"]
+ENTRYPOINT ["/usr/local/bin/startserver"]
