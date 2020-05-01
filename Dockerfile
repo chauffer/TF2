@@ -10,14 +10,17 @@ RUN set -x && \
 	wget -O /tmp/steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz && \
 	tar -zxvf /tmp/steamcmd.tar.gz -C /home/steam/steamcmd && \
 	chown steam:steam /home/steam/ -R && \
-	rm -rf /tmp/* /var/lib/apt/lists/* 
+	rm -rf /tmp/* /var/lib/apt/lists/*
 
 COPY tf2serv.txt /home/steam/steamcmd/tf2serv.txt
+
+RUN set -x && \
+	/home/steam/steamcmd/steamcmd.sh +runscript /home/steam/steamcmd/tf2serv.txt
+
 COPY bin/* /usr/local/bin/
 COPY sourcemod_plugins /home/steam/sourcemod_plugins
 
 RUN set -x && \
-	/home/steam/steamcmd/steamcmd.sh +runscript /home/steam/steamcmd/tf2serv.txt && \
 	update_metamod && \
 	update_sourcemod && \
 	compile_sourcemod_plugins && \

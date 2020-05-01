@@ -7,8 +7,8 @@ TO="/home/steam/tf2/tf/addons/plugins"
 mkdir -p $TMPDIR
 cd $TMPDIR
 
-cp $FROM $TMPDIR
-for i in $(ls); do 
+cp -r $FROM $TMPDIR
+for i in $(ls); do
     smxfile="`echo $i | sed -e 's/\.sp$/\.smx/'`"
     /home/steam/tf2/tf/addons/scripting/spcomp $i -o $smxfile
 done
