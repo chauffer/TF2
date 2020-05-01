@@ -20,5 +20,8 @@ while true; do
 	+maxplayers ${TTTF2_MAXPLAYERS} \
 	+sv_password "${TTTF2_SV_PASSWORD}" \
 	+rcon_password "${TTTF2_RCON_PASSWORD}" \
-	+hostname "${TTTF2_HOSTNAME}"
+	+hostname "${TTTF2_HOSTNAME}" \
+	+sv_setsteamaccount "${SRCDS_TOKEN}" \
+	+sv_region 3
+sleep 1
 done

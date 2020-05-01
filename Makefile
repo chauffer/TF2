@@ -3,7 +3,7 @@ up:
 	rsync ${LOCAL_PATH} root@${SERVER_IP}:${REMOTE_PATH} -av --progress
 
 d:
-	docker build -t tttf2/tttf2 .
+	docker build -t chauffer/tf2 .
 
 rd:
 	make up
@@ -25,4 +25,4 @@ run:
 	-v /root/git/tttf2/mnt:/mnt \
 	--name=tttf2 \
 	--entrypoint=bash \
-	tttf2/tttf2
+	chauffer/tf2

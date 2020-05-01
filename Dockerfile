@@ -14,22 +14,24 @@ RUN set -x && \
 
 COPY tf2serv.txt /home/steam/steamcmd/tf2serv.txt
 COPY bin/* /usr/local/bin/
+COPY sourcemod_plugins /home/steam/sourcemod_plugins
 
 RUN set -x && \
 	/home/steam/steamcmd/steamcmd.sh +runscript /home/steam/steamcmd/tf2serv.txt && \
 	update_metamod && \
 	update_sourcemod && \
+	compile_sourcemod_plugins && \
 	chown steam:steam /home/steam -R && \
 	rm -rfv /tmp/*
 
-ENV TTTF2_MAP="arena_badlands" \
+ENV TTTF2_MAP="cp_cloak" \
 	TTTF2_RCON_PASSWORD="changeme" \
 	TTTF2_SV_PASSWORD="toctoc" \
 	TTTF2_MAXPLAYERS="32" \
 	TTTF2_BIND_IP="0.0.0.0" \
 	TTTF2_PORT="27015" \
-	TTTF2_HOSTNAME="TTTF2.com Development Server" \
-	TTTF2_FASTDL="https://fastdl.tttf2.com/"
+	TTTF2_HOSTNAME="github.com/chauffer/tf2" \
+	TTTF2_FASTDL="https://tf2-fastdl.simone.sh/"
 
 USER steam
 EXPOSE 27015 27015/udp
